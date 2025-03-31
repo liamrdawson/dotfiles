@@ -689,6 +689,17 @@ else -- NOTE: IF NOT VSCODE
           -- But for many setups, the LSP (`ts_ls`) will work just fine
           -- ts_ls = {},
           --
+          eslint = { -- Add ESLint server config
+            filetypes = { -- Specify the relevant file types
+              'javascript',
+              'javascriptreact',
+              'typescript',
+              'typescriptreact',
+            },
+            -- settings = {
+            --   format = true, -- Enable formatting if desired
+            -- },
+          },
 
           lua_ls = {
             -- cmd = { ... },
@@ -722,6 +733,7 @@ else -- NOTE: IF NOT VSCODE
         local ensure_installed = vim.tbl_keys(servers or {})
         vim.list_extend(ensure_installed, {
           'stylua', -- Used to format Lua code
+          'eslint',
         })
         require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -781,6 +793,16 @@ else -- NOTE: IF NOT VSCODE
           --
           -- You can use 'stop_after_first' to run the first available formatter from the list
           -- javascript = { "prettierd", "prettier", stop_after_first = true },
+          lua = { 'stylua' }, -- Lua formatting
+          javascript = { 'prettierd', 'eslint_d' }, -- Use Prettier and fallback to eslint_d
+          javascriptreact = { 'prettierd', 'eslint_d' },
+          typescript = { 'prettierd', 'eslint_d' },
+          typescriptreact = { 'prettierd', 'eslint_d' },
+          html = { 'prettierd' },
+          css = { 'prettierd' },
+          json = { 'prettierd' },
+          yaml = { 'prettierd' },
+          markdown = { 'prettierd' },
         },
       },
     },
@@ -1029,7 +1051,7 @@ else -- NOTE: IF NOT VSCODE
     -- require 'kickstart.plugins.lint',
     -- require 'kickstart.plugins.autopairs',
     -- require 'kickstart.plugins.neo-tree',
-    -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+    require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
     --    This is the easiest way to modularize your config.
