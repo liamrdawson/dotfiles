@@ -408,11 +408,15 @@ else -- NOTE: IF NOT VSCODE
           -- You can put your default mappings / updates / etc. in here
           --  All the info you're looking for is in `:help telescope.setup()`
           --
-          -- defaults = {
-          --   mappings = {
-          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-          --   },
-          -- },
+          defaults = {
+            --   mappings = {
+            --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            --   },
+            theme = 'dropdown',
+            layout_config = { prompt_position = 'top' },
+            sorting_strategy = 'ascending',
+            layout_strategy = 'vertical',
+          },
           pickers = {
             live_grep = {
               file_ignore_patterns = { 'node_modules', '.git', '.venv' },
@@ -423,6 +427,13 @@ else -- NOTE: IF NOT VSCODE
             find_files = {
               file_ignore_patterns = { 'node_modules', '.git', '.venv' },
               hidden = true,
+            },
+            diagnostics = {
+              theme = 'ivy',
+              initial_mode = 'normal',
+              layout_config = {
+                preview_cutoff = 9999,
+              },
             },
           },
           extensions = {
