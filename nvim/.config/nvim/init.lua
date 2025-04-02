@@ -33,7 +33,7 @@ vim.opt.smartcase = true
 local is_vscode = vim.g.vscode ~= nil
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 15
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
@@ -531,6 +531,26 @@ else -- NOTE: IF NOT VSCODE
       end,
     },
 
+    {
+      'altermo/ultimate-autopair.nvim',
+      event = { 'InsertEnter' },
+      config = true,
+    },
+
+    {
+      'windwp/nvim-ts-autotag',
+
+      config = function()
+        require('nvim-ts-autotag').setup {
+          opts = {
+            enable_close = true,
+            enable_rename = true,
+            enable_close_on_slash = false,
+          },
+        }
+      end,
+    },
+
     -- LSP Plugins
     {
       -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -770,6 +790,14 @@ else -- NOTE: IF NOT VSCODE
             -- settings = {
             --   format = true, -- Enable formatting if desired
             -- },
+          },
+
+          html = {},
+          cssls = {},
+          tailwindcss = {
+            root_dir = function(...)
+              return require('lspconfig.util').root_pattern '.git'(...)
+            end,
           },
 
           lua_ls = {
@@ -1088,7 +1116,7 @@ else -- NOTE: IF NOT VSCODE
       main = 'nvim-treesitter.configs', -- Sets main module to use for opts
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
       opts = {
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+        ensure_installed = { 'bash', 'c', 'css', 'diff', 'graphql', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'sql', 'vim', 'vimdoc' },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = {
@@ -1108,6 +1136,7 @@ else -- NOTE: IF NOT VSCODE
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     },
 
+    { 'nvim-treesitter/nvim-treesitter-context' },
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
     -- place them in the correct locations.
