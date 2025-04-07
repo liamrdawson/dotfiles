@@ -74,6 +74,10 @@ end, { desc = 'Show diagnostics under cursor' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true })
 
+-- Quickfix
+vim.keymap.set('n', '<leader>j', '<cmd>cnext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>k', '<cmd>cprev<CR>', { noremap = true, silent = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
