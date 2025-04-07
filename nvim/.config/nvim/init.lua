@@ -66,6 +66,9 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>d', function()
+  vim.diagnostic.open_float { focus = false, scope = 'line' }
+end, { desc = 'Show diagnostics under cursor' })
 
 -- Move selected text up and down in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
@@ -233,7 +236,12 @@ else -- NOTE: IF NOT VSCODE
   require('lazy').setup({
     'ThePrimeagen/vim-be-good',
 
-    'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+    'tpope/vim-sleuth', -- Detect tabstop and shiftwith automatically
+
+    {
+      'MunifTanjim/nui.nvim',
+      lazy = true,
+    },
 
     {
       'stevearc/oil.nvim',
@@ -572,6 +580,34 @@ else -- NOTE: IF NOT VSCODE
       'pmizio/typescript-tools.nvim',
       dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
       opts = {},
+      config = function()
+        require('typescript-tools').setup {
+          tsserver_format_options = {
+            convertTabsToSpaces = true,
+            indentSize = 2,
+            tabSize = 2,
+          },
+          -- Enhance the completion experience
+          complete_function_calls = true,
+          include_completions_with_insert_text = true,
+        }
+        handlers = {
+          -- Custom handler for TypeScript errors to make them more readable
+          ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
+            if result.diagnostics == nil then
+              return
+            end
+
+            -- Process TypeScript errors to make them more readable
+            for _, diagnostic in ipairs(result.diagnostics) do
+              -- Simplify common TS errors
+              diagnostic.message = diagnostic.message:gsub("Type '(.-)' is not assignable to type '(.-)'.", "Type mismatch: '%1' is not assignable to '%2'")
+            end
+
+            vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+          end,
+        }
+      end,
     },
 
     {
@@ -729,7 +765,18 @@ else -- NOTE: IF NOT VSCODE
         -- See :help vim.diagnostic.Opts
         vim.diagnostic.config {
           severity_sort = true,
-          float = { border = 'rounded', source = 'if_many' },
+          float = {
+            border = 'rounded',
+            source = 'if_many',
+            format = function(diagnostic)
+              -- Format the message to make TypeScript errors more readable
+              local message = diagnostic.message
+              -- Add line breaks for readability
+              message = message:gsub('%. ', '.\n')
+              return message
+            end,
+            severity_sort = true,
+          },
           underline = { severity = vim.diagnostic.severity.ERROR },
           signs = vim.g.have_nerd_font and {
             text = {
@@ -741,7 +788,7 @@ else -- NOTE: IF NOT VSCODE
           } or {},
           virtual_text = {
             source = 'if_many',
-            spacing = 2,
+            spacing = 4,
             format = function(diagnostic)
               local diagnostic_message = {
                 [vim.diagnostic.severity.ERROR] = diagnostic.message,
