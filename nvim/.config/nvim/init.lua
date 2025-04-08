@@ -91,6 +91,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Always open help buffers to the side
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'help',
+  callback = function()
+    -- Move the help window to the far right
+    vim.cmd 'wincmd L'
+
+    -- Optional: Set a reasonable width for the help window
+    vim.cmd 'vertical resize 80'
+
+    -- Optional: Make it so the help window can't be resized horizontally
+    vim.wo.winfixwidth = true
+  end,
+  desc = 'Open help buffers to the right side',
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
