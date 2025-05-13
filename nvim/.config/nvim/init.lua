@@ -1,4 +1,4 @@
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -228,13 +228,22 @@ else -- NOTE: IF NOT VSCODE
   -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
   -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
   -- is not what someone will guess without a bit more experience.
-  --
+
   -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
   -- or just use <C-\><C-n> to exit terminal mode
   vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
   -- Keybinds to make split navigation easier.
   --  Use CTRL+<hjkl> to switch between windows
-  --
+
+  -- Comments
+  vim.keymap.set('n', '<D-/>', ':normal gcc<CR>', { desc = 'Toggle comment line' })
+  -- <Esc> - exists visual mode.
+  -- :normal executes keystrokes in normal mode.
+  -- gv - restores selection.
+  -- gc - toggles comment
+  -- <CR> sends the command
+  vim.keymap.set('v', '<D-/>', '<Esc>:normal gvgc<CR>', { desc = 'Toggle comment block' })
+
   --  See `:help wincmd` for a list of all window commands
   vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
   vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -254,7 +263,7 @@ else -- NOTE: IF NOT VSCODE
   --
   -- NOTE: Here is where you install your plugins.
   require('lazy').setup({
-    'ThePrimeagen/vim-be-good',
+    'ThePrimeagen/vim-be-good', -- Get better at vim movements (:VimBeGood)
 
     'tpope/vim-sleuth', -- Detect tabstop and shiftwith automatically
 
@@ -275,6 +284,9 @@ else -- NOTE: IF NOT VSCODE
           max_width = 0.5,
           max_height = 0.5,
           border = 'rounded',
+        },
+        view_options = {
+          show_hidden = true,
         },
       },
       -- Optional dependencies
@@ -459,6 +471,9 @@ else -- NOTE: IF NOT VSCODE
               file_ignore_patterns = { 'node_modules', '.git', '.venv' },
               hidden = true,
             },
+            git_status = {
+              layout_strategy = 'horizontal',
+            },
             diagnostics = {
               theme = 'ivy',
               initial_mode = 'normal',
@@ -523,9 +538,11 @@ else -- NOTE: IF NOT VSCODE
           initial_mode = 'normal',
           layout_config = { height = 40 },
         }
+
         vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
         vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
         vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+        vim.keymap.set('n', '<leader>sc', builtin.git_status, { desc = '[S]earch [C]hanged files ( tracked by git )' })
         vim.keymap.set('n', '<leader>sb', function()
           telescope.extensions.file_browser.file_browser(file_browser_opts)
         end, { desc = '[S]earch [B]rowser at current directory level' })
@@ -596,39 +613,39 @@ else -- NOTE: IF NOT VSCODE
       },
     },
 
-    {
-      'pmizio/typescript-tools.nvim',
-      dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-      opts = {},
-      config = function()
-        require('typescript-tools').setup {
-          tsserver_format_options = {
-            convertTabsToSpaces = true,
-            indentSize = 2,
-            tabSize = 2,
-          },
-          -- Enhance the completion experience
-          complete_function_calls = true,
-          include_completions_with_insert_text = true,
-        }
-        handlers = {
-          -- Custom handler for TypeScript errors to make them more readable
-          ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
-            if result.diagnostics == nil then
-              return
-            end
+    -- {
+    --   'pmizio/typescript-tools.nvim',
+    --   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    --   opts = {},
+    --   config = function()
+    --     require('typescript-tools').setup {
+    --       tsserver_format_options = {
+    --         convertTabsToSpaces = true,
+    --         indentSize = 2,
+    --         tabSize = 2,
+    --       },
+    --       -- Enhance the completion experience
+    --       complete_function_calls = true,
+    --       include_completions_with_insert_text = true,
+    --     }
+    --     handlers = {
+    --       -- Custom handler for TypeScript errors to make them more readable
+    --       ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
+    --         if result.diagnostics == nil then
+    --           return
+    --         end
 
-            -- Process TypeScript errors to make them more readable
-            for _, diagnostic in ipairs(result.diagnostics) do
-              -- Simplify common TS errors
-              diagnostic.message = diagnostic.message:gsub("Type '(.-)' is not assignable to type '(.-)'.", "Type mismatch: '%1' is not assignable to '%2'")
-            end
+    --         -- Process TypeScript errors to make them more readable
+    --         for _, diagnostic in ipairs(result.diagnostics) do
+    --           -- Simplify common TS errors
+    --           diagnostic.message = diagnostic.message:gsub("Type '(.-)' is not assignable to type '(.-)'.", "Type mismatch: '%1' is not assignable to '%2'")
+    --         end
 
-            vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-          end,
-        }
-      end,
-    },
+    --         vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+    --       end,
+    --     }
+    --   end,
+    -- },
 
     {
       -- Main LSP Configuration

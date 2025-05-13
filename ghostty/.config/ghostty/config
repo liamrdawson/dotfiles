@@ -24,7 +24,9 @@ font-family = "Monaspace Argon Var"
 font-thicken = true
 font-style = Light
 font-feature = calt, liga, ss01, ss02, ss03, ss04, ss05, ss06, ss07, ss08, ss09
-theme = "rose-pine"
+# theme = "rose-pine"
+theme = "Horizon"
+
 adjust-cell-height = 10%
 # window-padding-x = 2
 #
