@@ -267,6 +267,9 @@ else -- NOTE: IF NOT VSCODE
 
     'tpope/vim-sleuth', -- Detect tabstop and shiftwith automatically
 
+    'tpope/vim-fugitive', -- Git wrapper for neovim
+    'shumphrey/fugitive-gitlab.vim', -- Gitlab support for vim-fugitive
+
     {
       'MunifTanjim/nui.nvim',
       lazy = true,
@@ -277,6 +280,7 @@ else -- NOTE: IF NOT VSCODE
       ---@module 'oil'
       ---@type oil.SetupOpts
       opts = {
+        default_file_explorer = true,
         float = {
           -- Padding around the floating window
           padding = 2,
@@ -1142,20 +1146,26 @@ else -- NOTE: IF NOT VSCODE
     --    },
 
     {
-      'neanias/everforest-nvim',
-      version = false,
-      lazy = false,
-      priority = 1000, -- make sure to load this before all the other start plugins
-      -- Optional; default configuration will be used if setup isn't called.
+      'rebelot/kanagawa.nvim',
       config = function()
-        -- Your config here
-        require('everforest').setup {
-          background = 'hard',
-        }
-
-        vim.cmd 'colorscheme everforest'
+        vim.cmd 'colorscheme kanagawa-wave'
       end,
     },
+    -- {
+    --   'neanias/everforest-nvim',
+    --   version = false,
+    --   lazy = false,
+    --   priority = 1000, -- make sure to load this before all the other start plugins
+    --   -- Optional; default configuration will be used if setup isn't called.
+    --   config = function()
+    --     -- Your config here
+    --     require('everforest').setup {
+    --       background = 'hard',
+    --     }
+    --
+    --     vim.cmd 'colorscheme everforest'
+    --   end,
+    -- },
 
     -- Highlight todo, notes, etc in comments
     { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
