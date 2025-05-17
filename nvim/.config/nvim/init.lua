@@ -1,4 +1,4 @@
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+--  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)ini
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -18,6 +18,11 @@ vim.opt.showmode = false
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
+
+P = function(v)
+  print(vim.inspect(v))
+  return v
+end
 
 -- Enable break indent
 vim.opt.breakindent = true
