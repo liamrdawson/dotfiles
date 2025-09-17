@@ -96,6 +96,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.go',
+  callback = function()
+    vim.opt_local.expandtab = false
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+  end,
+})
+
 -- Always open help buffers to the side
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'help',
@@ -223,7 +232,7 @@ else -- NOTE: IF NOT VSCODE
   -- Sets how neovim will display certain whitespace characters in the editor.
   --  See `:help 'list'`
   --  and `:help 'listchars'`
-  vim.opt.list = true
+  vim.opt.list = false
   vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
   -- Configure how new splits should be opened
   vim.opt.splitright = true
@@ -865,7 +874,7 @@ else -- NOTE: IF NOT VSCODE
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
         local servers = {
           -- clangd = {},
-          -- gopls = {},
+          gopls = {},
           -- pyright = {},
           -- rust_analyzer = {},
           -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -1153,7 +1162,7 @@ else -- NOTE: IF NOT VSCODE
     {
       'rebelot/kanagawa.nvim',
       config = function()
-        vim.cmd 'colorscheme kanagawa-wave'
+        vim.cmd 'colorscheme kanagawa-dragon'
       end,
     },
     -- {
@@ -1212,6 +1221,41 @@ else -- NOTE: IF NOT VSCODE
         --  Check out: https://github.com/echasnovski/mini.nvim
       end,
     },
+
+    { 'folke/snacks.nvim', opts = { toggle = { enabled = true } } },
+
+    {
+      'MeanderingProgrammer/render-markdown.nvim',
+      opts = {
+        code = {
+          sign = false,
+          width = 'block',
+          right_pad = 1,
+        },
+        checkbox = {
+          enabled = false,
+        },
+      },
+      ft = { 'markdown', 'norg', 'rmd', 'org', 'codecompanion' },
+      config = function(_, opts)
+        require('render-markdown').setup(opts)
+        Snacks.toggle({
+          name = 'Render Markdown',
+          get = function()
+            return require('render-markdown.state').enabled
+          end,
+          set = function(enabled)
+            local m = require 'render-markdown'
+            if enabled then
+              m.enable()
+            else
+              m.disable()
+            end
+          end,
+        }):map '<leader>um'
+      end,
+    },
+
     { -- Highlight, edit, and navigate code
       'nvim-treesitter/nvim-treesitter',
       build = ':TSUpdate',
