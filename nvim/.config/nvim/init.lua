@@ -3,6 +3,9 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.opt.virtualedit = 'block' -- Enable multi-line editing in visual block mode
+vim.opt.wrap = false
+
+vim.opt.colorcolumn = '80'
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
@@ -875,6 +878,7 @@ else -- NOTE: IF NOT VSCODE
         local servers = {
           -- clangd = {},
           gopls = {},
+          bashls = {},
           -- pyright = {},
           -- rust_analyzer = {},
           -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs

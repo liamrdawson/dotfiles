@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -o pipefail # make sure that if any stage fails
+
+# take all positional args as the producer, join empty spaces
+rel=${PWD#"$HOME"}
+
+# Put together the directory and filename
+state="${XDG_STATE_HOME:-$HOME/.local/state}" # default to $HOME if no $XDG_
+dir="$state/logs${rel}/"
+file="$dir$(isodate).log"
+
+# Create the directory if it doesn't already exist
+mkdir -p -- "$dir"
+
+"$@" 2>&1 | tee "$file"
+s=${PIPESTATUS[0]} # capture the producer exit code
+printf '__EXIT_CODE__=%d\n' "$s" >>"$file"
+exit "$s"

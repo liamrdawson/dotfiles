@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# build a file name based on <YYYYMMDDThHMMSS.sssZ>.log for easy finding
+date_nanoseconds_tmz=$(date -Ins)
+nanoseconds_tmz="${date_nanoseconds_tmz##*,}" # delete everyhing up to and including ","
+milliseconds="${nanoseconds_tmz:0:3}"         # delete everything after the first three characters
+iso=$(date "+%Y%m%dT%H%M%S.$milliseconds")Z
+
+echo "$iso"

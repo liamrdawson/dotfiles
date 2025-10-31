@@ -2,6 +2,9 @@
 
 set -U fish_greeting ""
 
+# -q XDG_CONFIG -> [-q]uery if XDG_CONFIG is set
+# || -> run the right command if above is not set
+# set -U XDG_CONFIG_HOME $HOME/.config -> Set a [-U]niversal variable for XDG_CONFIG_HOME-
 set -q XDG_CONFIG_HOME || set -U XDG_CONFIG_HOME $HOME/.config
 
 # bobthefish settings
@@ -11,6 +14,7 @@ set -g theme_title_display_path yes
 set -g theme_color_scheme nord
 set -g theme_newline_prompt '〉'
 
+# Set up fzf key bindings
 fzf --fish | source
 
 # Aliases
@@ -29,16 +33,15 @@ alias gg="lazygit"
 
 ### Set the directory that the .dotfiles repo tracks to home directory.
 alias config="git --git-dir=$HOME/Development/.dotfiles --work-tree=$HOME"
+
 ## pnpm
-set -gx PNPM_HOME "/Users/liam/Library/pnpm"
+set -gx PNPM_HOME /Users/liam/Library/pnpm
 
 ## Directory shortcuts
 alias dev="cd ~/Development"
 
-
-
 if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
 
