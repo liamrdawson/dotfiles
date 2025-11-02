@@ -816,6 +816,23 @@ else -- NOTE: IF NOT VSCODE
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
               end, '[T]oggle Inlay [H]ints')
             end
+
+            -- Auto-organise imports
+            if client and client.name == 'biome' then
+              vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = event.buf,
+                callback = function()
+                  -- Request organise imports code action
+                  vim.lsp.buf.code_action {
+                    context = {
+                      only = { 'source.organizeImports' },
+                    },
+                    apply = true,
+                  }
+                end,
+                desc = 'Organise imports with Biome on save',
+              })
+            end
           end,
         })
 
@@ -889,6 +906,14 @@ else -- NOTE: IF NOT VSCODE
           -- But for many setups, the LSP (`ts_ls`) will work just fine
           -- ts_ls = {},
           --
+          biome = {
+            filetypes = {
+              'javascript',
+              'javascriptreact',
+              'typescript',
+              'typescriptreact',
+            },
+          },
           eslint = { -- Add ESLint server config
             filetypes = { -- Specify the relevant file types
               'javascript',
@@ -994,23 +1019,30 @@ else -- NOTE: IF NOT VSCODE
             lsp_format = lsp_format_opt,
           }
         end,
+        formatters = {
+          biome = {
+            require_cwd = true,
+          },
+          prettier = {
+            require_cwd = true,
+          },
+        },
         formatters_by_ft = {
-          lua = { 'stylua' },
           -- Conform can also run multiple formatters sequentially
           -- python = { "isort", "black" },
           --
           -- You can use 'stop_after_first' to run the first available formatter from the list
           -- javascript = { "prettierd", "prettier", stop_after_first = true },
           lua = { 'stylua' }, -- Lua formatting
-          javascript = { 'prettierd', 'eslint_d' }, -- Use Prettier and fallback to eslint_d
-          javascriptreact = { 'prettierd', 'eslint_d' },
-          typescript = { 'prettierd', 'eslint_d' },
-          typescriptreact = { 'prettierd', 'eslint_d' },
-          html = { 'prettierd' },
-          css = { 'prettierd' },
-          json = { 'prettierd' },
-          yaml = { 'prettierd' },
-          markdown = { 'prettierd' },
+          javascript = { 'biome', 'prettierd', 'eslint_d', stop_after_first = true }, -- Use Prettier and fallback to eslint_d
+          javascriptreact = { 'biome', 'prettierd', 'eslint_d', stop_after_first = true },
+          typescript = { 'biome', 'prettierd', 'eslint_d', stop_after_first = true },
+          typescriptreact = { 'biome', 'prettierd', 'eslint_d', stop_after_first = true },
+          html = { 'biome', 'prettierd', stop_after_first = true },
+          css = { 'biome', 'prettierd', stop_after_first = true },
+          json = { 'biome', 'prettierd', stop_after_first = true },
+          yaml = { 'biome', 'prettierd', stop_after_first = true },
+          markdown = { 'biome', 'prettierd', stop_after_first = true },
         },
       },
     },
