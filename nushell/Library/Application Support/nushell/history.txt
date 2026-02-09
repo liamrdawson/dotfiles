@@ -1,0 +1,4 @@
+cd dotfiles/
+stow nushell
+cd dotfiles/
+stow nushell

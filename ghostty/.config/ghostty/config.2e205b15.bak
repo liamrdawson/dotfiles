@@ -1,4 +1,3 @@
-command = /opt/homebrew/bin/nu
 # This is the configuration file for Ghostty.
 #
 # This template file has been automatically created at the following
@@ -51,4 +50,3 @@ adjust-cell-height = 10%
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-keybind = shift+enter=text:\x1b\r

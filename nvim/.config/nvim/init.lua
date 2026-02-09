@@ -108,6 +108,16 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   end,
 })
 
+-- Wrap markdown files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+  end,
+})
+
 -- Always open help buffers to the side
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'help',
@@ -1007,7 +1017,7 @@ else -- NOTE: IF NOT VSCODE
           -- Disable "format_on_save lsp_fallback" for languages that don't
           -- have a well standardized coding style. You can add additional
           -- languages here or re-enable it for the disabled ones.
-          local disable_filetypes = { c = true, cpp = true }
+          local disable_filetypes = { c = true, cpp = true, markdown = true }
           local lsp_format_opt
           if disable_filetypes[vim.bo[bufnr].filetype] then
             lsp_format_opt = 'never'
@@ -1042,7 +1052,6 @@ else -- NOTE: IF NOT VSCODE
           css = { 'biome', 'prettierd', stop_after_first = true },
           json = { 'biome', 'prettierd', stop_after_first = true },
           yaml = { 'biome', 'prettierd', stop_after_first = true },
-          markdown = { 'biome', 'prettierd', stop_after_first = true },
         },
       },
     },
