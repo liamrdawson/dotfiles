@@ -57,3 +57,7 @@ def fg [query?: string] {
         --preview-window 'right,50%,border-bottom,+{2}+3/3,~3' 
         --bind 'enter:become(nvim {1} +{2})' )
 }
+
+# needs to stay at the end of config according to: https://starship.rs/
+mkdir ($nu.data-dir | path join "vendor/autoload")
+starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")

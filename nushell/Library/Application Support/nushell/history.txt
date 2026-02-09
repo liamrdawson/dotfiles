@@ -2,3 +2,13 @@ cd dotfiles/
 stow nushell
 cd dotfiles/
 stow nushell
+lazygit
+nvim .
+stow nushell
+nvim
+config nu
+clear
+which starship
+config nu
+clear
+cd dotfiles/
