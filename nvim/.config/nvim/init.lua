@@ -570,6 +570,13 @@ else -- NOTE: IF NOT VSCODE
           layout_config = { height = 40 },
         }
 
+        local function telescope_file_path()
+          local filepath = vim.fn.expand '%'
+          vim.fn.setreg('*', filepath)
+          print('Yanked: ' .. filepath)
+        end
+
+        vim.keymap.set('n', '<leader>yp', telescope_file_path, { desc = '[Yank] current file [P]ath' })
         vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
         vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
         vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -827,22 +834,22 @@ else -- NOTE: IF NOT VSCODE
               end, '[T]oggle Inlay [H]ints')
             end
 
-            -- Auto-organise imports
-            if client and client.name == 'biome' then
-              vim.api.nvim_create_autocmd('BufWritePre', {
-                buffer = event.buf,
-                callback = function()
-                  -- Request organise imports code action
-                  vim.lsp.buf.code_action {
-                    context = {
-                      only = { 'source.organizeImports' },
-                    },
-                    apply = true,
-                  }
-                end,
-                desc = 'Organise imports with Biome on save',
-              })
-            end
+            -- -- Auto-organise imports
+            -- if client and client.name == 'biome' then
+            --   vim.api.nvim_create_autocmd('BufWritePre', {
+            --     buffer = event.buf,
+            --     callback = function()
+            --       -- Request organise imports code action
+            --       vim.lsp.buf.code_action {
+            --         context = {
+            --           only = { 'source.organizeImports' },
+            --         },
+            --         apply = true,
+            --       }
+            --     end,
+            --     desc = 'Organise imports with Biome on save',
+            --   })
+            -- end
           end,
         })
 
@@ -914,7 +921,15 @@ else -- NOTE: IF NOT VSCODE
           --    https://github.com/pmizio/typescript-tools.nvim
           --
           -- But for many setups, the LSP (`ts_ls`) will work just fine
-          -- ts_ls = {},
+          ts_ls = {
+            init_options = {
+              provideFormatter = false,
+            },
+            capabilities = {
+              documentFormattingProvider = false,
+              documentRangeFormattingProvider = false,
+            },
+          },
           --
           biome = {
             filetypes = {
@@ -931,9 +946,9 @@ else -- NOTE: IF NOT VSCODE
               'typescript',
               'typescriptreact',
             },
-            -- settings = {
-            --   format = true, -- Enable formatting if desired
-            -- },
+            settings = {
+              format = false, -- Enable formatting if desired
+            },
           },
 
           html = {},
@@ -1005,7 +1020,7 @@ else -- NOTE: IF NOT VSCODE
         {
           '<leader>f',
           function()
-            require('conform').format { async = true, lsp_format = 'fallback' }
+            require('conform').format { async = true, lsp_format = 'never' }
           end,
           mode = '',
           desc = '[F]ormat buffer',
@@ -1017,23 +1032,30 @@ else -- NOTE: IF NOT VSCODE
           -- Disable "format_on_save lsp_fallback" for languages that don't
           -- have a well standardized coding style. You can add additional
           -- languages here or re-enable it for the disabled ones.
-          local disable_filetypes = { c = true, cpp = true, markdown = true }
+          local disable_filetypes = {
+            javascript = true,
+            javascriptreact = true,
+            typescript = true,
+            typescriptreact = true,
+            c = true,
+            cpp = true,
+          }
           local lsp_format_opt
           if disable_filetypes[vim.bo[bufnr].filetype] then
             lsp_format_opt = 'never'
           else
-            lsp_format_opt = 'fallback'
+            lsp_format_opt = lsp_format_opt
           end
           return {
             timeout_ms = 500,
-            lsp_format = lsp_format_opt,
+            lsp_format = 'never',
           }
         end,
         formatters = {
           biome = {
             require_cwd = true,
           },
-          prettier = {
+          prettierd = {
             require_cwd = true,
           },
         },
@@ -1044,10 +1066,10 @@ else -- NOTE: IF NOT VSCODE
           -- You can use 'stop_after_first' to run the first available formatter from the list
           -- javascript = { "prettierd", "prettier", stop_after_first = true },
           lua = { 'stylua' }, -- Lua formatting
-          javascript = { 'biome', 'prettierd', 'eslint_d', stop_after_first = true }, -- Use Prettier and fallback to eslint_d
-          javascriptreact = { 'biome', 'prettierd', 'eslint_d', stop_after_first = true },
-          typescript = { 'biome', 'prettierd', 'eslint_d', stop_after_first = true },
-          typescriptreact = { 'biome', 'prettierd', 'eslint_d', stop_after_first = true },
+          javascript = { 'biome', 'prettierd', stop_after_first = true }, -- Use Prettier and fallback to eslint_d
+          javascriptreact = { 'biome', 'prettierd', stop_after_first = true },
+          typescript = { 'biome', 'prettierd', stop_after_first = true },
+          typescriptreact = { 'biome', 'prettierd', stop_after_first = true },
           html = { 'biome', 'prettierd', stop_after_first = true },
           css = { 'biome', 'prettierd', stop_after_first = true },
           json = { 'biome', 'prettierd', stop_after_first = true },
