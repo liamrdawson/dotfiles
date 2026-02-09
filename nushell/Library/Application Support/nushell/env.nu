@@ -1,7 +1,9 @@
-let secrets_path = $"($nu.default-config-dir)/secrets.nu"
-if ($secrets_path | path exists) {
-   source $secrets_path
-}
+
+$env.PATH = ($env.PATH | prepend "/opt/homebrew/bin")
+
+const secrets_path = ($nu.default-config-dir | path join "secrets.nu")
+source-env $secrets_path
+
 # env.nu
 #
 # Installed by:
@@ -30,8 +32,8 @@ def create_left_prompt [] {
 # Use nushell functions to define your right and left prompt
 $env.PROMPT_COMMAND = { || create_left_prompt }
 
-$env.GITLAB_TOKEN = $env.NPM_TOKEN
-$env.CI_JOB_TOKEN = $env.NPM_TOKEN
+$env.GITLAB_TOKEN = ($env | get -o NPM_TOKEN | default "")
+$env.CI_JOB_TOKEN = ($env | get -o NPM_TOKEN | default "")
 
 $env.FNM_DIR = $"($env.HOME)/.local/share/fnm"
 $env.FNM_LOGLEVEL = "info"
