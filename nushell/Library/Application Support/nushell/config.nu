@@ -20,6 +20,7 @@
 $env.config.buffer_editor = "nvim"
 $env.path ++= ["~/.local/bin"]
 $env.path ++= ["/opt/homebrew/bin"]
+$env.config.show_banner = false
 
 
 def lz [depth: int = 1] {
