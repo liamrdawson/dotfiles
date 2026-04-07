@@ -1,0 +1,55 @@
+{
+    "test_data": {
+        "find_skus": {
+            "url": "https://test-data.dunqa.io/findSkus",
+            "headers": [],
+            "type": "application/json",
+            "body": {
+                "hd": {
+                    "type": "Web DC"
+                },
+                "hasSingleVariant": true
+            }
+        }
+    },
+    "bms": {
+        "add_product": {
+            "url": "https://bms.dunqa.io/basket/product",
+            "headers": [],
+            "type": "application/json",
+            "body": {
+                "id": "",
+                "items": [
+                    {
+                            "sku": "30085024",
+                            "price": 49.99,
+                            "quantity": 1,
+                            "itemName": "Wardrobe",
+                            "productName": "White",
+                            "imageUrl": "https://images.dunelm.com/30085024.jpg?$v8srpgrid$&img404=noimagedefault"
+                    }
+                ]
+            }
+        }
+    },
+    "cks": {
+        "auth": {
+            "url": "https://auth.dunqa.io/oauth/token",
+            "headers": [],
+            "type": "application/json"
+        },
+        "create_provisional_order": {
+            "url": "https://checkout-graphql.dunqa.io/graphql",
+            "headers": [],
+            "type": "application/json",
+            "body": {}
+        },
+        "set_personal_details": {
+            "url": "https://checkout-graphql.dunqa.io/graphql",
+            "headers": [],
+            "type": "application/json",
+            "body": {}
+        }
+    },
+    "was": {}
+}

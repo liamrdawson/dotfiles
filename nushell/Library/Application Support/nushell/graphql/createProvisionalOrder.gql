@@ -1,0 +1,59 @@
+mutation CreateProvisionalOrder($input: CreateProvisionalOrderInput!) {
+  createProvisionalOrder(input: $input) {
+    provisionalOrder {
+      customerOrderId
+      errors
+      expiryDate
+      expressAvailable
+      status
+      totalPricePayable
+      voucherCode
+      deliveryAddress {
+        city
+        id
+        line1
+        line2
+        line3
+        postcode
+      }
+      id
+      itemCount
+      homeDeliveryItemCount
+      clickAndCollectItemCount
+      fulfilmentTypes
+      selectedFulfilmentType
+      orderLinesPrice {
+        discountAmount
+        discountedPrice
+        originalPrice
+      }
+      orderLines {
+        clickAndCollectPromiseMilliseconds
+        customProperties
+        customProduct
+        fulfilmentType
+        id
+        isDayOfChoice
+        price
+        totalPrice
+        unitPrice
+        quantity
+        selectedSlotDate
+        selectedSlotType
+
+        defaultPromise {
+          date
+          onOrBy
+          weeks
+        }
+        expressPromise {
+          date
+          onOrBy
+        }
+      }
+      account {
+        id
+      }
+    }
+  }
+}

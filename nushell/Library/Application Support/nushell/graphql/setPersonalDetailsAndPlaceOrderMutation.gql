@@ -1,0 +1,16 @@
+mutation SetCheckoutDeliveryPersonalDetails(
+  $input: SetCheckoutPersonalDetailsInput!
+) {
+  setCheckoutDeliveryPersonalDetails(input: $input) {
+    provisionalOrder {
+      id
+      personalDetails {
+        title
+        emailAddress
+        firstName
+        lastName
+        phoneNumber
+      }
+    }
+  }
+}

@@ -17,13 +17,32 @@
 # options using:
 #     config nu --doc | nu-highlight | less -R
 
+# ENV
 $env.config.buffer_editor = "nvim"
 $env.path ++= ["~/.local/bin"]
 $env.path ++= ["/opt/homebrew/bin"]
+$env.PATH ++= ["~/.cargo/bin"]
+
 $env.config.show_banner = false
 
+use apis.nu *
+
+if not (which fnm | is-empty) {
+    ^fnm env --json | from json | load-env
+
+    $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join (if $nu.os-info.name == 'windows' {''} else {'bin'}))
+    $env.config.hooks.env_change.PWD = (
+        $env.config.hooks.env_change.PWD? | append {
+            condition: {|| ['.nvmrc' '.node-version', 'package.json'] | any {|el| $el | path exists}}
+            code: {|| ^fnm use --install-if-missing}
+        }
+    )
+}
+
+# ALIASES
 alias v = nvim
 
+# FUNCTIONS
 def lz [depth: int = 1] {
   ^eza --all --no-user --icons=always --long --tree --header --recurse --level $depth
 }
@@ -60,6 +79,7 @@ def fg [query?: string] {
         --bind 'enter:become(nvim {1} +{2})' )
 }
 
+# PROMPT
 # needs to stay at the end of config according to: https://starship.rs/
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
