@@ -1295,45 +1295,20 @@ else -- NOTE: IF NOT VSCODE
       end,
     },
 
-    { -- Highlight, edit, and navigate code
+    {
       'nvim-treesitter/nvim-treesitter',
-      branch = 'main', -- explicitly track main
-      lazy = false,
       build = ':TSUpdate',
-      config = function()
-        require('nvim-treesitter').setup {
-          -- install_dir = vim.fn.stdpath('data') .. '/site'  -- optional
-        }
-
-        -- Install parsers
-        require('nvim-treesitter').install {
-          'bash',
-          'c',
-          'css',
-          'diff',
-          'graphql',
-          'html',
-          'lua',
-          'luadoc',
-          'markdown',
-          'markdown_inline',
-          'query',
-          'sql',
-          'vim',
-          'vimdoc',
-        }
-
-        vim.api.nvim_create_autocmd('FileType', {
-          callback = function()
-            pcall(vim.treesitter.start)
-          end,
-        })
-        -- Folding (optional)
-        -- vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        -- vim.wo[0][0].foldmethod = 'expr'
-      end,
+      main = 'nvim-treesitter.configs',
+      opts = {
+        ensure_installed = { 'bash', 'c', 'css', 'diff', 'graphql', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'sql', 'vim', 'vimdoc' },
+        auto_install = true,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = { 'ruby' },
+        },
+        indent = { enable = true, disable = { 'ruby' } },
+      },
     },
-
     { 'nvim-treesitter/nvim-treesitter-context' },
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
