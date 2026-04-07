@@ -22,6 +22,8 @@ $env.config.buffer_editor = "nvim"
 $env.path ++= ["~/.local/bin"]
 $env.path ++= ["/opt/homebrew/bin"]
 $env.PATH ++= ["~/.cargo/bin"]
+$env.PATH = ($env.PATH | prepend ($env.HOME | path join ".local/share/bob/nvim-bin"))
+
 
 $env.config.show_banner = false
 
