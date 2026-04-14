@@ -15,7 +15,7 @@ vim.pack.add {
   'https://github.com/echasnovski/mini.nvim',
 
   -- Navigation
-  'https://github.com/stevearc/oil.nvim', -- [CHANGED] sole file explorer
+  'https://github.com/stevearc/oil.nvim',
 
   -- Git
   'https://github.com/tpope/vim-fugitive',
@@ -25,7 +25,7 @@ vim.pack.add {
   -- LSP / Formatting
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/williamboman/mason.nvim',
-  'https://github.com/williamboman/mason-lspconfig.nvim', -- [CHANGED] now wired up in lsp.lua
+  'https://github.com/williamboman/mason-lspconfig.nvim',
   'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
   'https://github.com/j-hui/fidget.nvim',
   'https://github.com/stevearc/conform.nvim',
@@ -85,7 +85,6 @@ vim.keymap.set('x', '<C-c>', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
--- [CHANGED] renamed from <leader>d to <leader>dd to avoid conflict with [D]ocument which-key group
 vim.keymap.set('n', '<leader>dd', function()
   vim.diagnostic.open_float { focus = false, scope = 'line' }
 end, { desc = '[D]iagnostics: show current line' })
@@ -151,7 +150,6 @@ require 'custom.formatting'
 require 'custom.autocompletion'
 
 -- Oil (file explorer) ---------------------------------------------------------
--- [CHANGED] Oil is the sole file explorer; snacks explorer removed
 require('oil').setup {
   default_file_explorer = true,
   float = { padding = 2, max_width = 0.5, max_height = 0.5, border = 'rounded' },
