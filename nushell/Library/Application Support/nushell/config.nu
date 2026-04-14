@@ -22,6 +22,7 @@ $env.path ++= ["~/.local/bin"]
 $env.path ++= ["/opt/homebrew/bin"]
 $env.config.show_banner = false
 
+alias v = nvim
 
 def lz [depth: int = 1] {
   ^eza --all --no-user --icons=always --long --tree --header --recurse --level $depth
