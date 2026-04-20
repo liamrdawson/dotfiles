@@ -30,6 +30,7 @@ vim.pack.add {
   'https://github.com/j-hui/fidget.nvim',
   'https://github.com/stevearc/conform.nvim',
   'https://github.com/folke/lazydev.nvim',
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
 
   -- Completion
   'https://github.com/hrsh7th/nvim-cmp',
@@ -247,6 +248,7 @@ require('render-markdown').setup {
   code = { sign = false, width = 'block', right_pad = 1 },
   checkbox = { enabled = false },
 }
+
 vim.keymap.set('n', '<leader>um', function()
   local m = require 'render-markdown'
   if require('render-markdown.state').enabled then

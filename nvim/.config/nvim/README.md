@@ -4,7 +4,7 @@ A personal Neovim configuration built on native Neovim 0.11+ features where poss
 
 ## Requirements
 
-- Neovim 0.11+
+- Neovim 0.12+
 - A terminal with true colour support
 - `git`
 - `ripgrep` (for grep search)
