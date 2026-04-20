@@ -24,6 +24,11 @@ $env.path ++= ["/opt/homebrew/bin"]
 $env.PATH ++= ["~/.cargo/bin"]
 $env.PATH = ($env.PATH | prepend ($env.HOME | path join ".local/share/bob/nvim-bin"))
 
+$env.FZF_DEFAULT_OPTS = "
+  --color=fg:#c5c9c5,fg+:#c5c9c5,bg:#181616,bg+:#282727
+  --color=hl:#8ba4b0,hl+:#7fb4ca,info:#8a9a7b,marker:#87a987
+  --color=prompt:#c4746e,spinner:#957fb8,pointer:#957fb8,header:#7a8382
+  --color=border:#282727,label:#717c7c,query:#c5c9c5"
 
 $env.config.show_banner = false
 
@@ -60,7 +65,7 @@ def lsr [depth: int = 1] {
 
 def f [query?: string] {
     ( fzf --query (  $query | default '' )
-        --preview 'bat --theme=base16 --color=always --style=numbers --line-range=:500 {}' 
+        --preview 'bat --color=always --style=numbers --line-range=:500 {}' 
         --height 90% 
         --border )
 }
@@ -75,7 +80,7 @@ def fg [query?: string] {
         --bind $"start:reload:($rg_prefix) '{q}'" 
         --bind $"change:reload:sleep 0.1; ($rg_prefix) {q} || true" 
         --delimiter : 
-        --preview 'bat --theme=base16 --color=always --line-range=:500 {1}' 
+        --preview 'bat  --color=always --line-range=:500 {1}' 
         --height 90% 
         --preview-window 'right,50%,border-bottom,+{2}+3/3,~3' 
         --bind 'enter:become(nvim {1} +{2})' )
