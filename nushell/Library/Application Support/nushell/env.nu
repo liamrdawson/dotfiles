@@ -21,7 +21,6 @@ $env.api = open $api_path
 #
 # You can remove these comments if you want or leave
 # them for future reference.
-$env.GITLAB_API_TOKEN=
 $env.STARSHIP_SHELL = "nu"
 def create_left_prompt [] { starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)' }
 # Use nushell functions to define your right and left prompt
