@@ -1,6 +1,9 @@
 require('conform').setup {
   formatters = {
-    biome = { require_cwd = true },
+    biome = { 
+      require_cwd = true,
+      args = { 'check', '--write', '--stdin-file-path', '$FILENAME' },
+    },
     prettierd = { require_cwd = true },
   },
   formatters_by_ft = {
@@ -13,14 +16,14 @@ require('conform').setup {
     html = { 'biome', 'prettierd', stop_after_first = true },
     css = { 'biome', 'prettierd', stop_after_first = true },
     json = { 'biome', 'prettierd', stop_after_first = true },
-    yaml = { 'biome', 'prettierd', stop_after_first = true },
+    -- yaml = { 'biome', 'prettierd', stop_after_first = true },
   },
 }
 
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*',
   callback = function(args)
-    require('conform').format { bufnr = args.buf, timeout_ms = 500 }
+    require('conform').format { bufnr = args.buf, timeout_ms = 2000 }
   end,
 })
 

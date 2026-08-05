@@ -16,6 +16,7 @@ vim.pack.add {
 
   -- Navigation
   'https://github.com/stevearc/oil.nvim',
+  'https://github.com/otavioschwanck/arrow.nvim',
 
   -- Git
   'https://github.com/tpope/vim-fugitive',
@@ -149,6 +150,8 @@ require 'custom.lsp'
 require 'custom.search'
 require 'custom.formatting'
 require 'custom.autocompletion'
+require 'custom.git'
+require 'custom.hover'
 
 -- Oil (file explorer) ---------------------------------------------------------
 require('oil').setup {
@@ -157,6 +160,13 @@ require('oil').setup {
   view_options = { show_hidden = true },
 }
 vim.keymap.set('n', '-', '<cmd>Oil --float<cr>', { desc = 'Open Oil' })
+
+-- Arrow (bookmarks) ----------------------------------------------------------
+require('arrow').setup {
+  show_icons = true,
+  leader_key = ';',
+  buffer_leader_key = "'",
+}
 
 -- Gitsigns --------------------------------------------------------------------
 require('gitsigns').setup {

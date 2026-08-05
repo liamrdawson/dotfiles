@@ -166,6 +166,10 @@ require('nvim-treesitter').install {
   'vim',
   'vimdoc',
   'go',
+  'javascript',
+  'typescript',
+  'markdown',
+  'markdown_inline',
 }
 
 vim.api.nvim_create_autocmd('FileType', {

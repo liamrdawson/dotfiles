@@ -86,6 +86,10 @@ def fg [query?: string] {
         --bind 'enter:become(nvim {1} +{2})' )
 }
 
+def "config v" [] {
+    nvim ~/dotfiles/nvim/.config/nvim
+}
+
 # PROMPT
 # needs to stay at the end of config according to: https://starship.rs/
 mkdir ($nu.data-dir | path join "vendor/autoload")
