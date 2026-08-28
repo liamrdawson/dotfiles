@@ -48,6 +48,9 @@ if not (which fnm | is-empty) {
 
 # ALIASES
 alias v = nvim
+alias h = herdr
+alias hsl = herdr session list
+
 
 # FUNCTIONS
 def lz [depth: int = 1] {

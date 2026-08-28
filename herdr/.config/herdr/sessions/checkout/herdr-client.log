@@ -1,0 +1,12 @@
+2026-08-27T13:06:26.086703Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=64051
+2026-08-27T13:06:26.086777Z  INFO herdr::client: connecting to server path=/Users/ldawson/.config/herdr/sessions/checkout/herdr-client.sock
+2026-08-27T13:06:26.294823Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-27T13:29:44.042028Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=64051
+2026-08-27T13:30:05.431215Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=26910
+2026-08-27T13:30:05.431293Z  INFO herdr::client: connecting to server path=/Users/ldawson/.config/herdr/sessions/checkout/herdr-client.sock
+2026-08-27T13:30:05.438690Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-27T15:12:00.477760Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=26910
+2026-08-27T15:12:32.851972Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=79550
+2026-08-27T15:12:32.852379Z  INFO herdr::client: connecting to server path=/Users/ldawson/.config/herdr/sessions/checkout/herdr-client.sock
+2026-08-27T15:12:32.940523Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-28T08:34:26.837270Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=79550
