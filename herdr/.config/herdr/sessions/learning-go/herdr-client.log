@@ -1,0 +1,4 @@
+2026-10-01T19:19:42.121832Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=37930
+2026-10-01T19:19:42.121862Z  INFO herdr::client: connecting to server path=/Users/liam/.config/herdr/sessions/learning-go/herdr-client.sock
+2026-10-01T19:19:42.263476Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-10-03T12:28:44.082279Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=37930

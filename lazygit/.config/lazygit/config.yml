@@ -327,11 +327,8 @@ git:
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   # for more information.
   # Config regit:
-  # pagers:
-  #   - pager: delta --dark --paging=never
-  diffRenderers:
-    - command: delta --dark --paging=never
-      colorArg: always
+  pagers:
+    - pager: delta --dark --paging=neverlating to committing
   commit:
     # If true, pass '--signoff' flag when committing
     signOff: false
@@ -596,7 +593,7 @@ keybinding:
     nextMatch: "n"
     prevMatch: "N"
     startSearch: /
-    optionMenu: x
+    optionMenu: <disabled>
     optionMenu-alt1: '?'
     select: <space>
     goInto: <enter>
@@ -712,7 +709,7 @@ keybinding:
     markCommitAsBaseForRebase: B
     tagCommit: T
     checkoutCommit: <space>
-    resetCherryPick: <c-r>
+    resetCherryPick: <c-R>
     copyCommitAttributeToClipboard: "y"
     openLogMenu: <c-l>
     openInBrowser: o

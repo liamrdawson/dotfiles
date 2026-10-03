@@ -1,0 +1,58 @@
+2026-10-01T19:19:42.073950Z  INFO herdr::platform::macos: raised server file descriptor soft limit previous=256 target=8192
+2026-10-01T19:19:42.074701Z  INFO herdr::api::server: api server listening path=/Users/liam/.config/herdr/sessions/learning-go/herdr.sock
+2026-10-01T19:19:42.075658Z  INFO herdr::app: using pane scrollback configuration pane_scrollback_limit_bytes=10000000
+2026-10-01T19:19:42.105557Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-10-01T19:19:42.113206Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=1 rows=40 cols=120 scrollback_limit_bytes=10000000
+2026-10-01T19:19:42.115392Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=1 pid=37960
+2026-10-01T19:19:42.115680Z  INFO herdr::logging: workspace created event="workspace.create" subsystem="workspace" outcome="ok" workspace_id="w1" pane_id=1
+2026-10-01T19:19:42.115697Z  INFO herdr::logging: workspace focused event="workspace.focus" subsystem="workspace" outcome="ok" workspace_id="w1"
+2026-10-01T19:19:42.115724Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:19:42.115762Z  INFO herdr::server::headless: created startup workspace cwd=/Users/liam/Development/tutorials/go/learn-go-with-tests
+2026-10-01T19:19:42.115869Z  INFO herdr::server::headless: client protocol socket listening path=/Users/liam/.config/herdr/sessions/learning-go/herdr-client.sock
+2026-10-01T19:19:42.115909Z  INFO herdr::server::headless: herdr server started api_socket=/Users/liam/.config/herdr/sessions/learning-go/herdr.sock client_socket=/Users/liam/.config/herdr/sessions/learning-go/herdr-client.sock
+2026-10-01T19:19:42.116159Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="server" outcome="started" pid=37931
+2026-10-01T19:19:42.235022Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-10-01T19:19:42.235042Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-10-01T19:19:42.263078Z  INFO herdr::logging: update available event="update.available" subsystem="update" outcome="ok" version="0.9.3"
+2026-10-01T19:19:42.263097Z  INFO herdr::update: new stable build available at https://github.com/herdrdev/herdr/releases/download/v0.9.3/herdr-macos-aarch64
+2026-10-01T19:19:42.263299Z  INFO herdr::update: auto-update check: 0.9.3 available, waiting for explicit install
+2026-10-01T19:19:42.263895Z  INFO herdr::server::headless: client connected client_id=2 cols=88 rows=54 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-10-01T19:19:47.121527Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:20:03.907177Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=2 rows=53 cols=62 scrollback_limit_bytes=10000000
+2026-10-01T19:20:03.911843Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=2 pid=38352
+2026-10-01T19:20:03.912094Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:20:08.917266Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:20:32.533191Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:20:37.538879Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:21:24.238539Z  INFO herdr::server::headless: client resize client_id=2 cols=93 rows=58 cell_width_px=0 cell_height_px=0
+2026-10-01T19:21:27.543950Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:21:36.473494Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:21:41.479076Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:22:12.880273Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:22:17.886695Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:22:42.489491Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:22:47.492545Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:23:50.715552Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:23:55.720467Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:25:31.765109Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:25:36.769944Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:28:03.333311Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:28:08.338800Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:28:36.482673Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:28:41.488981Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:29:17.047701Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:29:22.052445Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:30:56.116612Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:31:01.121265Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-01T19:31:24.247463Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-01T19:31:29.254069Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-02T18:28:32.937597Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-10-02T18:28:32.938373Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-10-03T12:28:40.677131Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-03T12:28:44.081504Z  INFO herdr::server::headless: client detach requested via keybind client_id=2
+2026-10-03T12:28:44.085975Z  INFO herdr::server::headless: client disconnected client_id=2
+2026-10-03T12:28:45.684175Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/Users/liam/.config/herdr/sessions/learning-go/session.json workspaces=1
+2026-10-03T12:34:47.760571Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-10-03T12:34:47.761704Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-10-03T13:04:47.672418Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-10-03T13:04:47.673435Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
